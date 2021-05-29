@@ -8,6 +8,7 @@ authors = ["Caitlin <10053862+con-cat@users.noreply.github.com>"]
 python = "^3.9"
 Django = "^3.2.3"
 envparse = "^0.2.0"
+requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from decimal import Decimal
 
 from django.db import models
@@ -24,3 +25,21 @@ class Product(models.Model):
     @property
     def discount(self) -> Decimal:
         return self.previous_price / self.savings_amount
+
+    def update_data(
+        self,
+        *,
+        name: str,
+        current_price: Decimal,
+        is_on_special: bool,
+        previous_price: Decimal,
+        savings_amount: Decimal,
+    ):
+        if not self.name:
+            self.name = name
+        self.current_price = current_price
+        self.is_on_special = is_on_special
+        self.previous_price = previous_price
+        self.savings_amount = savings_amount
+        self.updated_at = datetime.now(timezone.utc)
+        self.save()
