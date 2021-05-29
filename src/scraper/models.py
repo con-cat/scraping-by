@@ -30,7 +30,10 @@ class Product(models.Model):
 
     @property
     def discount(self) -> Decimal:
-        return self.previous_price / self.savings_amount
+        if self.previous_price and self.savings_amount:
+            return self.savings_amount / self.previous_price
+        else:
+            return Decimal(0)
 
     def update_data(
         self,
