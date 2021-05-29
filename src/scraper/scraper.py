@@ -11,7 +11,7 @@ class ErrorFetchingProduct(Exception):
     pass
 
 
-def get_product_data(product_id: int) -> t.Optional[t.Dict]:
+def get_product_data(product_id: int) -> t.Dict:
     response = requests.get(
         settings.API_URL.format(str(product_id)), headers=settings.REQUEST_HEADERS
     )
@@ -21,7 +21,7 @@ def get_product_data(product_id: int) -> t.Optional[t.Dict]:
         raise ErrorFetchingProduct(response.reason)
 
 
-def scrape() -> None:
+def scrape() -> t.Tuple[int, int]:
     updated_count = 0
     products = models.Product.objects.all()
     for product in products:
@@ -41,4 +41,4 @@ def scrape() -> None:
         )
         updated_count += 1
 
-    logging.info(f"{updated_count} products of {len(products)} updated")
+    return updated_count, len(products)
