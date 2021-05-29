@@ -9,6 +9,7 @@ python = "^3.9"
 Django = "^3.2.3"
 envparse = "^0.2.0"
 requests = "^2.25.1"
+django-on-heroku = "^1.1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

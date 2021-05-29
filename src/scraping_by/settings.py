@@ -141,3 +141,8 @@ REQUEST_HEADERS = {
     "Gecko/20100101 Firefox/71.0"
 }
 SLACK_URL = env("SLACK_URL", None)
+
+# Configure Django App for Heroku.
+import django_on_heroku  # noqa: E402
+
+django_on_heroku.settings(locals())
