@@ -9,13 +9,19 @@ class Product(models.Model):
     ww_id = models.PositiveIntegerField(unique=True, db_index=True)
     name = models.CharField(max_length=128, blank=True, default="")
     # InstorePrice from the API
-    current_price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
+    current_price = models.DecimalField(
+        max_digits=6, decimal_places=2, null=True, blank=True
+    )
     # InstoreIsOnSpecial
     is_on_special = models.BooleanField(default=False)
     # InstoreWasPrice and InstoreSavingsAmount
-    previous_price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-    savings_amount = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-    updated_at = models.DateTimeField(null=True)
+    previous_price = models.DecimalField(
+        max_digits=6, decimal_places=2, null=True, blank=True
+    )
+    savings_amount = models.DecimalField(
+        max_digits=6, decimal_places=2, null=True, blank=True
+    )
+    updated_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self) -> str:
         if self.name:
