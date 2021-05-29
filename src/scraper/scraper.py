@@ -12,13 +12,12 @@ class ErrorFetchingProduct(Exception):
 
 
 def get_product_data(product_id: int) -> t.Dict:
-    response = requests.get(
-        settings.API_URL.format(str(product_id)), headers=settings.REQUEST_HEADERS
-    )
-    if response.status_code == requests.codes.ok:
+    try:
+        response = requests.get(settings.API_URL.format(str(product_id)), timeout=5)
+        response.raise_for_status()
         return response.json()["Product"]
-    else:
-        raise ErrorFetchingProduct(response.reason)
+    except Exception as e:
+        raise ErrorFetchingProduct(str(e))
 
 
 def scrape() -> t.Tuple[int, int]:

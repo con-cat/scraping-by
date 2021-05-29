@@ -136,10 +136,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Scraping By settings
 
 API_URL = env("API_URL")
-REQUEST_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:71.0) "
-    "Gecko/20100101 Firefox/71.0"
-}
 SLACK_URL = env("SLACK_URL", None)
 
 # Configure Django App for Heroku.
