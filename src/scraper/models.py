@@ -35,7 +35,7 @@ class Product(models.Model):
         else:
             return Decimal(0)
 
-    def update_data(
+    def update_data_from_api(
         self,
         *,
         name: str,
@@ -46,9 +46,16 @@ class Product(models.Model):
     ):
         if not self.name:
             self.name = name
-        self.current_price = current_price
         self.is_on_special = is_on_special
-        self.previous_price = previous_price
-        self.savings_amount = savings_amount
-        self.updated_at = datetime.now(timezone.utc)
+        # We only want to update price data if the API response actually
+        # contains it - it can contain null values if session cookies aren't
+        # set properly
+        if current_price:
+            self.current_price = current_price
+        if previous_price:
+            self.previous_price = previous_price
+        if savings_amount:
+            self.savings_amount = savings_amount
+        if current_price or previous_price or savings_amount:
+            self.updated_at = datetime.now(timezone.utc)
         self.save()

@@ -31,7 +31,7 @@ def scrape() -> t.Tuple[int, int]:
             logging.warning(f"Error fetching product {product}: {err}")
             continue
 
-        product.update_data(
+        product.update_data_from_api(
             name=product_data["Name"].strip(),
             current_price=product_data["InstorePrice"],
             is_on_special=product_data["InstoreIsOnSpecial"],
