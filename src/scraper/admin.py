@@ -4,6 +4,9 @@ from django.contrib import admin
 from . import scraper
 from .models import Product
 
+admin.site.site_header = "🤑 Scraping By"
+admin.site.site_title = "🤑 Scraping By"
+
 
 @admin.action(description="Scrape selected products")
 def scrape(modeladmin, request, queryset):
