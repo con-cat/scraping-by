@@ -1,12 +1,12 @@
 from django.core.management.base import BaseCommand
-from scraper import scraper
+from scraper import models, scraper
 
 
 class Command(BaseCommand):
     help = "Queries the API and updates product data if possible"
 
     def handle(self, *args, **options):
-        num_updated, num_products = scraper.scrape()
+        num_updated, num_products = scraper.scrape(models.Product.objects.all())
 
         style = self.style.SUCCESS
         if num_updated == 0:

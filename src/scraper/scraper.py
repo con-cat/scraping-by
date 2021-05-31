@@ -20,9 +20,13 @@ def get_product_data(product_id: int) -> t.Dict:
         raise ErrorFetchingProduct(str(e))
 
 
-def scrape() -> t.Tuple[int, int]:
+def scrape(products: t.Iterable[models.Product]) -> t.Tuple[int, int]:
+    """
+    Take a queryset of products, and try to get their data from the API.
+
+    Returns the number of products updated, and the total number of products
+    """
     updated_count = 0
-    products = models.Product.objects.all()
     for product in products:
         # Try to get the product's data from the API
         try:
@@ -40,4 +44,5 @@ def scrape() -> t.Tuple[int, int]:
         )
         updated_count += 1
 
+    logging.info(f"{updated_count} of {len(products)} updated.")
     return updated_count, len(products)
